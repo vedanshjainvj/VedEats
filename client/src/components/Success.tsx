@@ -1,12 +1,41 @@
-import React, { useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import { useSearchParams } from "react-router-dom";
 import axios from "axios";
 import { Download, XCircle } from "lucide-react";
+import { CartItem } from "@/types/cartType";
+
+interface DeliveryDetails {
+  name: string;
+  email: string;
+  address: string;
+  city: string;
+  contact: string;
+  country: string;
+}
+
+interface OrderDetails {
+  _id: string;
+  totalAmount: number;
+  status: string;
+  paymentId: string;
+  paymentMode: string;
+  paidAt: string;
+  deliveryDetails: DeliveryDetails;
+  cartItems: CartItem[];
+}
+
+interface ApiResponse {
+  success: boolean;
+  data: {
+    order: OrderDetails;
+  };
+  message: string;
+}
 
 const Success = () => {
-  const [orderDetails, setOrderDetails] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
+  const [orderDetails, setOrderDetails] = useState<OrderDetails | null>(null);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState<string | null>(null);
   const [searchParams] = useSearchParams();
 
   useEffect(() => {
@@ -19,12 +48,18 @@ const Success = () => {
       }
 
       try {
-        const response = await axios.get(
-          `http://localhost:8000/api/v1/order/fetch-order-details/${orderId}`
-        ); // Replace with your API endpoint
-        setOrderDetails(response.data.data.order);
+        const response = await axios.get<ApiResponse>(
+          `${process.env.REACT_APP_API_URL}/api/v1/order/fetch-order-details/${orderId}`
+        );
+        
+        if (response.data.success && response.data.data.order) {
+          setOrderDetails(response.data.data.order);
+        } else {
+          throw new Error(response.data.message || "Failed to fetch order details");
+        }
       } catch (err) {
-        setError("Failed to fetch order details.");
+        const errorMessage = err instanceof Error ? err.message : "Failed to fetch order details.";
+        setError(errorMessage);
       } finally {
         setLoading(false);
       }
@@ -55,7 +90,7 @@ const Success = () => {
         {/* Header Section */}
         <div className="flex flex-col items-center text-center">
           <img
-            src="https://cdn.dribbble.com/users/3232028/screenshots/17250321/media/642c6f61b195e721ee4582d5b574e220.gif" // Replace with your GIF path
+            src="/success-delivery.gif"
             alt="Delivery on the way"
             className="w-48 h-48 object-contain mb-6"
           />
@@ -79,7 +114,7 @@ const Success = () => {
                 <strong>Order ID:</strong> {orderDetails._id}
               </p>
               <p className="text-gray-700">
-                <strong>Total Amount:</strong> Rs {orderDetails.totalAmount / 100}
+                <strong>Total Amount:</strong> Rs {(orderDetails.totalAmount / 100).toFixed(2)}
               </p>
               <p className="text-gray-700">
                 <strong>Status:</strong> {orderDetails.status}
@@ -88,10 +123,10 @@ const Success = () => {
                 <strong>PayId:</strong> {orderDetails.paymentId}
               </p>
               <p className="text-gray-700">
-                <strong>Payment Mode:</strong> Rs {orderDetails.paymentMode}
+                <strong>Payment Mode:</strong> {orderDetails.paymentMode}
               </p>
               <p className="text-gray-700">
-                <strong>Paid At:</strong> {orderDetails.paidAt}
+                <strong>Paid At:</strong> {new Date(orderDetails.paidAt).toLocaleString()}
               </p>
             </div>
 
@@ -111,6 +146,9 @@ const Success = () => {
               </p>
               <p className="text-gray-700">
                 <strong>City:</strong> {orderDetails.deliveryDetails.city}
+              </p>
+              <p className="text-gray-700">
+                <strong>Contact:</strong> {orderDetails.deliveryDetails.contact}
               </p>
             </div>
 
@@ -144,20 +182,6 @@ const Success = () => {
             </div>
           </div>
         )}
-
-        {/* Footer Section with Buttons */}
-        {/* <div className="mt-10 flex justify-center gap-4">
-          <button
-            className="flex items-center gap-2 px-6 py-3 bg-red-500 text-white rounded-lg shadow hover:bg-red-600 focus:ring focus:ring-red-300"
-          >
-            <XCircle /> Cancel Order
-          </button>
-          <button
-            className="flex items-center gap-2 px-6 py-3 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 focus:ring focus:ring-blue-300"
-          >
-            <Download /> Download Invoice
-          </button>
-        </div> */}
       </div>
     </div>
   );

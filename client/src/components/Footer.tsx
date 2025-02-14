@@ -1,5 +1,4 @@
-import React from 'react';
-import { Facebook, Instagram, Twitter, Linkedin, Mail, ArrowRight, MapPin, Phone } from 'lucide-react';
+import { Facebook, Instagram, Twitter, Linkedin, ArrowRight, MapPin, Phone } from 'lucide-react';
 import { Button } from './ui/button';
 import { Input } from './ui/input';
 

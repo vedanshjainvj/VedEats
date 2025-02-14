@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import { useEffect } from "react";
 import { useRestaurantStore } from "@/store/useRestaurantStore";
 import { useNavigate } from "react-router-dom";
-import MaxWidthWrapper from './MaxWidthWrapper';
 
 const RestaurantCard = () => {
   const { getAllRestaurants, allRestaurants, loading, getSingleRestaurant } =
@@ -12,7 +11,7 @@ const RestaurantCard = () => {
     getAllRestaurants(); // Fetch all restaurants on component mount
   }, [getAllRestaurants]);
 
-  const handleViewDetails = async (restaurantId) => {
+  const handleViewDetails = async (restaurantId:any) => {
     try {
       await getSingleRestaurant(restaurantId); // Fetch single restaurant details
       navigate(`/restaurant/${restaurantId}`); // Navigate to the restaurant page
@@ -38,7 +37,6 @@ const RestaurantCard = () => {
   }
 
   return (
-    <MaxWidthWrapper>
     <div className="p-4">
       <h1 className="text-4xl font-extrabold text-center mb-8 text-gray-800">
         Explore <span className="text-red-600">Restaurants</span>
@@ -83,7 +81,6 @@ const RestaurantCard = () => {
         ))}
       </div>
     </div>
-    </MaxWidthWrapper>
   );
 };
 

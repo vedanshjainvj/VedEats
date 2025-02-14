@@ -1,5 +1,6 @@
 
 import cors from 'cors';
+import path from 'path';
 import dotenv from 'dotenv';
 import express from 'express';
 import { createServer } from 'http';
@@ -24,11 +25,19 @@ app.use(cookieParser());
 app.use(bodyParser.json({ limit: '10mb' }));
 app.use(cors(corsOptions));
 
+// --------------- GLOBAL VARIABLES ---------------
+const DIRNAME = path.resolve();
+
 // --------------- ROUTES ---------------
 app.use('/api/v1', MainRouter);
 
 // --------------- SOCKET.IO CONNECTION HANDLING ---------------
 initSocketIO(httpServer);
+
+app.use(express.static(path.join(DIRNAME, '/client/dist')));
+app.use("*", (_,res) => {
+    res.sendFile(path.resolve(DIRNAME, "client", "dist", "index.html"));
+})
 
 // --------------- SERVER ---------------
 const PORT = process.env.PORT || 3000;

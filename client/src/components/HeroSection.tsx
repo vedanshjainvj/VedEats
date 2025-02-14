@@ -1,9 +1,8 @@
-import React, { useState } from "react";
 import { ShoppingCart, ShieldCheck, Search, ArrowRight } from "lucide-react";
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
 import { useNavigate } from "react-router-dom";
-import MaxWidthWrapper from './MaxWidthWrapper';
+import { useState } from "react";
 
 const HeroSection = () => {
   const [searchText, setSearchText] = useState("");
@@ -11,7 +10,6 @@ const HeroSection = () => {
 
   return (
     <div className="lg:px-20">
-      <MaxWidthWrapper>
         <section className="min-h-[90vh] flex flex-col lg:flex-row items-center justify-between py-12 px-4 gap-8">
           {/* Left Content */}
           <div className="flex-1 max-w-2xl">
@@ -111,7 +109,6 @@ const HeroSection = () => {
             </div>
           </div>
         </section>
-      </MaxWidthWrapper>
     </div>
   );
 };

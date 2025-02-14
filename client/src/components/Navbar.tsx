@@ -14,21 +14,16 @@ import {
 } from "./ui/dropdown-menu";
 import { Button } from "./ui/button";
 import {
-  HandPlatter,
+  
   Loader2,
   Menu,
   Moon,
-  PackageCheck,
   ShoppingCart,
-  SquareMenu,
   Sun,
-  User,
-  UtensilsCrossed,
 } from "lucide-react";
 import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
 import {
   Sheet,
-  SheetClose,
   SheetContent,
   SheetDescription,
   SheetFooter,
@@ -200,7 +195,7 @@ const MobileNavbar = () => {
               <AvatarImage src={user?.profilePicture} alt="User Profile" />
               <AvatarFallback>CN</AvatarFallback>
             </Avatar>
-            <span className="font-medium text-gray-800">{user?.name || "VedEats"}</span>
+            <span className="font-medium text-gray-800">{user?.fullname}</span>
           </div>
 
           {loading ? (

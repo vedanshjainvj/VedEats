@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon index.ts"
+    "dev": "nodemon server/index.ts",
+    "stripe": "stripe listen --forward-to localhost:5000/api/v1/order/webhook",
+    "build": "npm install && npm install --prefix client && npm run build --prefix client",
+    "start": "node server/index.js"
   },
   "keywords": [],
   "author": "",

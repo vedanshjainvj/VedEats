@@ -1,10 +1,7 @@
 import { FormEvent, useRef, useState } from "react";
 import {
   Loader2,
-  Mail,
-  MapPin,
   Camera,
-  Phone,
   User,
   Settings,
   CreditCard,

@@ -21,6 +21,7 @@ type MenuState = {
   loading: boolean;
   menu: Menu | null;
   allMenus: Menu[];
+  menuFetched: boolean; 
   
   createMenu: (formData: FormData) => Promise<void>;
   editMenu: (menuId: string, formData: FormData) => Promise<void>;
