@@ -8,19 +8,14 @@ const AvailableMenu = ({ menus }: { menus: MenuItem[] }) => {
   const { addToCart } = useCartStore();
   const navigate = useNavigate();
   return (
-    <div className="md:p-4">
-      <h1 className="text-xl md:text-2xl font-extrabold mb-6">
-        Available Menus
-      </h1>
-      <div className="grid md:grid-cols-3 space-y-4 md:space-y-0">
-        {menus.map((menu: MenuItem) => (
-          // console.log(menu),
-          <Card className="max-w-xs mx-auto shadow-lg rounded-lg overflow-hidden">
-            <img src={menu.image} alt="" className="w-full h-40 object-cover" />
-            <CardContent className="p-4">
-              <h2 className="text-xl font-semibold text-gray-800 dark:text-white">
-                {menu.name}
-              </h2>
+    <div className="mt-12 px-6 md:px-8 lg:px-12">
+      <h1 className="text-2xl md:text-3xl font-extrabold mb-6 text-gray-900">Available Menus</h1>
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+        {menus.map((menu: MenuItem, index: number) => (
+          <Card key={index} className="shadow-lg rounded-lg overflow-hidden">
+            <img src={menu.image} alt="Menu Item" className="w-full h-40 object-cover" />
+            <CardContent className="p-6">
+              <h2 className="text-lg font-semibold text-gray-900">{menu.name}</h2>
               <p className="text-sm text-gray-600 mt-2">{menu.description}</p>
               <h3 className="text-lg font-semibold mt-4">
                 Price: <span className="text-[#D19254]">₹{menu.price}</span>
@@ -32,7 +27,7 @@ const AvailableMenu = ({ menus }: { menus: MenuItem[] }) => {
                   addToCart(menu);
                   navigate("/cart");
                 }}
-                className="w-full bg-orange hover:bg-hoverOrange"
+                className="w-full bg-red-600 hover:bg-red-700"
               >
                 Add to Cart
               </Button>

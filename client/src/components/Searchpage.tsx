@@ -4,7 +4,7 @@ import { Input } from "./ui/input";
 import { useEffect, useState } from "react";
 import { Button } from "./ui/button";
 import { Badge } from "./ui/badge";
-import { Globe, MapPin, X } from "lucide-react";
+import { Globe, MapPin, X, Search, Star, Clock, TrendingUp } from "lucide-react";
 import { Card, CardContent, CardFooter } from "./ui/card";
 import { AspectRatio } from "./ui/aspect-ratio";
 import { Skeleton } from "./ui/skeleton";
@@ -14,9 +14,7 @@ import { Restaurant } from "@/types/restaurantType";
 const SearchPage = () => {
   const params = useParams();
   const [searchQuery, setSearchQuery] = useState<string>("");
-
   const {
-    
     searchedRestaurant,
     searchRestaurant,
     setAppliedFilter,
@@ -24,120 +22,158 @@ const SearchPage = () => {
     loading
   } = useRestaurantStore();
 
-  // Trigger search when params.text or appliedFilter changes
   useEffect(() => {
     if (params.text) {
       searchRestaurant(params.text, searchQuery, appliedFilter);
     }
-  }, [params.text, appliedFilter,searchQuery]);
+  }, [params.text, appliedFilter, searchQuery]);
 
   const handleSearch = () => {
     searchRestaurant(params.text!, searchQuery, appliedFilter);
   };
 
   return (
-    <div className="max-w-7xl mx-auto my-10">
-      <div className="flex flex-col md:flex-row justify-between gap-10">
-        <FilterPage />
-        <div className="flex-1">
-          {/* Search Input Field */}
-          <div className="flex items-center gap-2">
-            <Input
-              type="text"
-              value={searchQuery}
-              placeholder="Search by restaurant & cuisines"
-              onChange={(e) => setSearchQuery(e.target.value)}
-            />
-            <Button onClick={handleSearch} className="bg-orange hover:bg-hoverOrange">
+    <div className="bg-accent-cream min-h-screen py-8">
+      <div className="max-w-7xl mx-auto px-4">
+        {/* Search Header */}
+        <div className="bg-white rounded-2xl shadow-md p-6 mb-8">
+          <h1 className="text-2xl font-bold text-accent-charcoal mb-4">
+            Find Your Perfect Restaurant
+          </h1>
+          <div className="flex flex-col md:flex-row gap-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" />
+              <Input
+                type="text"
+                value={searchQuery}
+                placeholder="Search by restaurant name or cuisine"
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10 py-6 border-2 border-gray-100 focus:border-restaurant-300 rounded-xl"
+              />
+            </div>
+            <Button 
+              onClick={handleSearch} 
+              className="bg-restaurant-500 hover:bg-restaurant-600 text-white px-8 py-6 rounded-xl"
+            >
               Search
             </Button>
           </div>
+        </div>
 
-          {/* Searched Items Display */}
-          <div>
-            {/* Search Result Count */}
-            <div className="flex flex-col gap-3 md:flex-row md:items-center md:gap-2 my-3">
-              <h1 className="font-medium text-lg">
-                ({searchedRestaurant?.length || 0}) Search result(s) found
-              </h1>
-              {/* Applied Filters */}
-              <div className="flex flex-wrap gap-2 mb-4 md:mb-0">
-                {appliedFilter.map((selectedFilter: string, idx: number) => (
-                  <div key={idx} className="relative inline-flex items-center max-w-full">
+        <div className="flex flex-col lg:flex-row gap-8">
+          {/* Filters Section */}
+          <div className="lg:w-1/4">
+            <div className="bg-white rounded-2xl shadow-md p-6 sticky top-8">
+              <FilterPage />
+            </div>
+          </div>
+
+          {/* Results Section */}
+          <div className="lg:w-3/4">
+            {/* Applied Filters */}
+            <div className="bg-white rounded-2xl shadow-md p-6 mb-6">
+              <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4">
+                <h2 className="text-lg font-semibold text-accent-charcoal">
+                  {searchedRestaurant?.length || 0} Results Found
+                </h2>
+                <div className="flex flex-wrap gap-2">
+                  {appliedFilter.map((filter: string, idx: number) => (
                     <Badge
-                      className="text-[#D19254] rounded-md hover:cursor-pointer pr-6 whitespace-nowrap"
-                      variant="outline"
+                      key={idx}
+                      className="bg-restaurant-50 text-restaurant-600 hover:bg-restaurant-100 rounded-lg px-3 py-1"
                     >
-                      {selectedFilter}
+                      {filter}
+                      <X
+                        onClick={() => setAppliedFilter(filter)}
+                        size={16}
+                        className="ml-2 cursor-pointer"
+                      />
                     </Badge>
-                    <X
-                      onClick={() => setAppliedFilter(selectedFilter)}
-                      size={16}
-                      className="absolute text-[#D19254] right-1 hover:cursor-pointer"
-                    />
-                  </div>
-                ))}
+                  ))}
+                </div>
               </div>
             </div>
 
-            {/* Restaurant Cards */}
-            <div className="grid md:grid-cols-3 gap-4">
-              {loading ? (
+            {/* Restaurant Grid */}
+            {loading ? (
+              <div className="grid md:grid-cols-2 gap-6">
                 <SearchPageSkeleton />
-              ) : searchedRestaurant?.length === 0 ? (
-                <NoResultFound searchText={params.text!} />
-              ) : (
-                searchedRestaurant?.map((restaurant: Restaurant) => (
-                  console.log(restaurant),
+              </div>
+            ) : searchedRestaurant?.length === 0 ? (
+              <NoResultFound searchText={params.text!} />
+            ) : (
+              <div className="grid md:grid-cols-2 gap-6">
+                {searchedRestaurant?.map((restaurant: Restaurant) => (
                   <Card
                     key={restaurant._id}
-                    className="bg-white dark:bg-gray-800 shadow-xl rounded-xl overflow-hidden hover:shadow-2xl transition-shadow duration-300"
+                    className="bg-white rounded-2xl overflow-hidden hover:shadow-xl transition-all duration-300 border-0"
                   >
                     <div className="relative">
-                      <AspectRatio ratio={16 / 6}>
+                      <AspectRatio ratio={16 / 9}>
                         <img
                           src={restaurant.imageUrl}
                           alt={restaurant.restaurantName}
                           className="w-full h-full object-cover"
                         />
                       </AspectRatio>
-                      
+                      <div className="absolute top-4 right-4">
+                        <Badge className="bg-white/90 text-restaurant-600 px-3 py-1">
+                          <Clock size={14} className="mr-1" />
+                          30-45 min
+                        </Badge>
+                      </div>
                     </div>
-                    <CardContent className="p-4">
-                      <h1 className="text-2xl font-bold text-gray-900 dark:text-gray-100">
-                        {restaurant.restaurantName}
-                      </h1>
-                      <div className="mt-2 flex items-center gap-1 text-gray-600 dark:text-gray-400">
-                        <MapPin size={16} />
-                        <p className="text-sm">
-                          City: <span className="font-medium">{restaurant.city}</span>
-                        </p>
+
+                    <CardContent className="p-6">
+                      <div className="flex justify-between items-start mb-4">
+                        <h3 className="text-xl font-bold text-accent-charcoal">
+                          {restaurant.restaurantName}
+                        </h3>
+                        <Badge className="bg-restaurant-50 text-restaurant-600">
+                          <Star size={14} className="mr-1" /> 4.5
+                        </Badge>
                       </div>
-                      <div className="mt-2 flex items-center gap-1 text-gray-600 dark:text-gray-400">
-                        <Globe size={16} />
-                        <p className="text-sm">
-                          Country: <span className="font-medium">{restaurant.country}</span>
-                        </p>
+
+                      <div className="space-y-2 mb-4">
+                        <div className="flex items-center text-gray-600">
+                          <MapPin size={16} className="mr-2" />
+                          <span className="text-sm">{restaurant.city}</span>
+                        </div>
+                        <div className="flex items-center text-gray-600">
+                          <Globe size={16} className="mr-2" />
+                          <span className="text-sm">{restaurant.country}</span>
+                        </div>
                       </div>
-                      <div className="flex gap-2 mt-4 flex-wrap">
+
+                      <div className="flex flex-wrap gap-2">
                         {restaurant.cuisines.map((cuisine: string, idx: number) => (
-                          <Badge key={idx} className="font-medium px-2 py-1 rounded-full shadow-sm">
+                          <Badge
+                            key={idx}
+                            className="bg-gray-100 text-gray-600 rounded-full px-3 py-1"
+                          >
                             {cuisine}
                           </Badge>
                         ))}
                       </div>
                     </CardContent>
-                    <CardFooter className="p-4 border-t dark:border-t-gray-700 border-t-gray-100 flex justify-end">
-                      <Link to={`/restaurant/${restaurant._id}`}>
-                        <Button className="bg-orange hover:bg-hoverOrange font-semibold py-2 px-4 rounded-full">
-                          View Menus
-                        </Button>
-                      </Link>
+
+                    <CardFooter className="p-6 bg-gray-50">
+                      <div className="w-full flex justify-between items-center">
+                        <div className="flex items-center text-restaurant-600">
+                          <TrendingUp size={16} className="mr-1" />
+                          <span className="text-sm font-medium">Popular Choice</span>
+                        </div>
+                        <Link to={`/restaurant/${restaurant._id}`}>
+                          <Button className="bg-restaurant-500 hover:bg-restaurant-600 text-white rounded-xl px-6">
+                            View Menu
+                          </Button>
+                        </Link>
+                      </div>
                     </CardFooter>
                   </Card>
-                ))
-              )}
-            </div>
+                ))}
+              </div>
+            )}
           </div>
         </div>
       </div>
@@ -145,38 +181,45 @@ const SearchPage = () => {
   );
 };
 
-export default SearchPage;
-
 const SearchPageSkeleton = () => (
   <>
-    {[...Array(3)].map((_, index) => (
-      <Card key={index} className="bg-white dark:bg-gray-800 shadow-xl rounded-xl">
-        <AspectRatio ratio={16 / 6}>
+    {[...Array(4)].map((_, index) => (
+      <Card key={index} className="bg-white rounded-2xl overflow-hidden">
+        <AspectRatio ratio={16 / 9}>
           <Skeleton className="w-full h-full" />
         </AspectRatio>
-        <CardContent className="p-4">
-          <Skeleton className="h-8 w-3/4 mb-2" />
+        <CardContent className="p-6">
+          <Skeleton className="h-8 w-3/4 mb-4" />
           <Skeleton className="h-4 w-1/2 mb-2" />
-          <Skeleton className="h-4 w-1/2" />
+          <Skeleton className="h-4 w-1/2 mb-4" />
+          <div className="flex gap-2">
+            <Skeleton className="h-6 w-20 rounded-full" />
+            <Skeleton className="h-6 w-20 rounded-full" />
+            <Skeleton className="h-6 w-20 rounded-full" />
+          </div>
         </CardContent>
-        <CardFooter className="p-4">
-          <Skeleton className="h-10 w-24 rounded-full" />
-        </CardFooter>
       </Card>
     ))}
   </>
 );
 
 const NoResultFound = ({ searchText }: { searchText: string }) => (
-  <div className="text-center">
-    <h1 className="text-2xl font-semibold text-gray-700 dark:text-gray-200">
-      No results found
-    </h1>
-    <p className="mt-2 text-gray-500 dark:text-gray-400">
-      We couldn't find any results for "{searchText}". <br /> Try searching with a different term.
-    </p>
-    <Link to="/">
-      <Button className="mt-4 bg-orange hover:bg-hoverOrange">Go Back to Home</Button>
-    </Link>
+  <div className="bg-white rounded-2xl p-8 text-center">
+    <div className="max-w-md mx-auto">
+      <h2 className="text-2xl font-bold text-accent-charcoal mb-4">
+        No Results Found
+      </h2>
+      <p className="text-gray-600 mb-6">
+        We couldn't find any restaurants matching "{searchText}". 
+        Try adjusting your search terms or filters.
+      </p>
+      <Link to="/">
+        <Button className="bg-restaurant-500 hover:bg-restaurant-600 text-white px-6 py-2 rounded-xl">
+          Back to Home
+        </Button>
+      </Link>
+    </div>
   </div>
 );
+
+export default SearchPage;

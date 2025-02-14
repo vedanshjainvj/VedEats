@@ -173,12 +173,7 @@ const MyOrders = () => {
         })}
       </div>
 
-      {/* Continue Shopping Button */}
-      <Link to="/cart" className="mt-8">
-        <Button className="bg-orange-500 hover:bg-orange-600 py-3 px-8 rounded-full shadow-lg transition-all hover:scale-105">
-          Continue Shopping
-        </Button>
-      </Link>
+      
     </div>
   );
 };

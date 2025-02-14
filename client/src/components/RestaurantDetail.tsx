@@ -8,42 +8,46 @@ import { useParams } from "react-router-dom";
 const RestaurantDetail = () => {
   const params = useParams();
   const { singleRestaurant, getSingleRestaurant } = useRestaurantStore();
-  
+
   useEffect(() => {
-    getSingleRestaurant(params.id!); 
-    
+    getSingleRestaurant(params.id!);
   }, [params.id]);
 
   return (
-    <div className="max-w-6xl mx-auto my-10">
-      <div className="w-full">
-        <div className="relative w-full h-32 md:h-64 lg:h-72">
+    <div className="max-w-6xl mx-auto my-12 px-6 md:px-8 lg:px-12">
+      <div className="w-full space-y-8">
+        {/* Restaurant Image */}
+        <div className="relative w-full h-40 md:h-64 lg:h-80">
           <img
             src={singleRestaurant?.imageUrl || "Loading..."}
-            alt="res_image"
+            alt="Restaurant Image"
             className="object-cover w-full h-full rounded-lg shadow-lg"
           />
         </div>
-        <div className="flex flex-col md:flex-row justify-between">
-          <div className="my-5">
-            <h1 className="font-medium text-xl">{singleRestaurant?.restaurantName || "Loading..."}</h1>
-            <div className="flex gap-2 my-2">
+        
+        {/* Restaurant Details */}
+        <div className="flex flex-col md:flex-row justify-between items-start md:items-center space-y-4 md:space-y-0">
+          <div>
+            <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
+              {singleRestaurant?.restaurantName || "Loading..."}
+            </h1>
+            <div className="flex flex-wrap gap-2 mt-2">
               {singleRestaurant?.cuisines.map((cuisine: string, idx: number) => (
-                <Badge key={idx}>{cuisine}</Badge>
+                <Badge key={idx} className="px-3 py-1 text-sm font-medium">{cuisine}</Badge>
               ))}
             </div>
-            <div className="flex md:flex-row flex-col gap-2 my-5">
-              <div className="flex items-center gap-2">
-                <Timer className="w-5 h-5" />
-                <h1 className="flex items-center gap-2 font-medium">
-                  Delivery Time: <span className="text-[#D19254]">{singleRestaurant?.deliveryTime || "NA"} mins</span>
-                </h1>
-              </div>
+            <div className="flex items-center gap-4 mt-4">
+              <Timer className="w-6 h-6 text-gray-600" />
+              <h2 className="text-lg font-medium text-gray-700">
+                Delivery Time: <span className="text-[#D19254] font-semibold">{singleRestaurant?.deliveryTime || "NA"} mins</span>
+              </h2>
             </div>
           </div>
         </div>
-       {singleRestaurant?.menus && <AvailableMenu menus = {singleRestaurant?.menus!}/>} 
       </div>
+      
+      {/* Available Menus */}
+      {singleRestaurant?.menus && <AvailableMenu menus={singleRestaurant?.menus!} />} 
     </div>
   );
 };
