@@ -1,5 +1,5 @@
 /** @type {import('tailwindcss').Config} */
-module.exports = {
+export default {
     darkMode: ["class"],
     content: ["./index.html", "./src/**/*.{ts,tsx,js,jsx}"],
     theme: {
@@ -10,7 +10,6 @@ module.exports = {
                 sm: 'calc(var(--radius) - 4px)'
             },
             colors: {
-                // Restaurant-specific red palette
                 restaurant: {
                     50: '#fff1f1',
                     100: '#ffe1e1',
@@ -23,14 +22,12 @@ module.exports = {
                     800: '#a31414',
                     900: '#861818',
                 },
-                // Complementary colors
                 accent: {
-                    cream: '#FFF8F0',  // Warm cream for backgrounds
-                    gold: '#C6A87C',   // Elegant gold accents
-                    brown: '#8B4513',  // Rich brown for text/accents
-                    charcoal: '#2C2C2C' // Dark gray for text
+                    cream: '#FFF8F0',
+                    gold: '#C6A87C',
+                    brown: '#8B4513',
+                    charcoal: '#2C2C2C'
                 },
-                // Keep existing theme colors
                 background: 'hsl(var(--background))',
                 foreground: 'hsl(var(--foreground))',
                 orange: "var(--button)",
@@ -73,4 +70,4 @@ module.exports = {
         }
     },
     plugins: [require("tailwindcss-animate")],
-}
+};
