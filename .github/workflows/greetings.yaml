@@ -1,7 +1,6 @@
 name: Greetings
 
 on:
-  fork:
   push:
     branches: [main]
   issues:
