@@ -1,0 +1,38 @@
+services:
+  server:
+    build: ./server
+    container_name: ved_eats_backend
+    env_file:
+      - ./server/.env  # ✅ Load environment variables from server/.env
+    ports:
+      - "8000:8000"
+    depends_on:
+      - mongo
+    volumes:
+      - ./server:/app
+      - /app/node_modules
+    restart: always
+
+  client:
+    build: ./client
+    container_name: ved_eats_frontend
+    ports:
+      - "3000:3000"
+    depends_on:
+      - server
+    volumes:
+      - ./client:/app
+      - /app/node_modules
+    restart: always
+
+  mongo:
+    image: mongo
+    container_name: ved_eats_mongodb
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongo_data:/data/db
+    restart: always
+
+volumes:
+  mongo_data:
