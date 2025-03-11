@@ -1,10 +1,14 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Loader2, LockKeyholeIcon } from "lucide-react";
 import { useState } from "react";
 import { Link, useParams } from "react-router-dom";
-import { useUserStore } from "@/store/useUserStore"; // Adjust the path as per your file structure
+import { Loader2, LockKeyholeIcon } from "lucide-react";
 import { toast } from "sonner";
+
+// --------------- IMPORTING UI COMPONENTS ---------------
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
+// --------------- IMPORTING OTHER FILES ---------------
+import { useUserStore } from "@/store/useUserStore";
 
 const ResetPassword = () => {
     const [newPassword, setNewPassword] = useState<string>("");

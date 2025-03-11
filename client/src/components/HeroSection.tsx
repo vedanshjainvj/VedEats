@@ -1,8 +1,12 @@
-import { ShoppingCart, ShieldCheck, Search, ArrowRight } from "lucide-react";
+import { useState } from "react";
+import { useNavigate } from "react-router-dom";
+
+// --------------- IMPORTING UI COMPONENTS ---------------
 import { Input } from "./ui/input";
 import { Button } from "./ui/button";
-import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+
+// --------------- IMPORTING ICONS ---------------
+import { ShoppingCart, ShieldCheck, Search, ArrowRight } from "lucide-react";
 
 const HeroSection = () => {
   const [searchText, setSearchText] = useState("");

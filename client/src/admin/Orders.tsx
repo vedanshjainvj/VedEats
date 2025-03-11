@@ -1,16 +1,13 @@
-import { Label } from "@/components/ui/label";
-import {
-  Select,
-  SelectContent,
-  SelectGroup,
-  SelectItem,
-  SelectTrigger,
-  SelectValue,
-} from "@/components/ui/select";
-import { useRestaurantStore } from "@/store/useRestaurantStore";
 import { useEffect } from "react";
-import { toast } from "sonner";
 import { useSearchParams } from "react-router-dom";
+import { toast } from "sonner";
+
+// --------------- IMPORTING UI COMPONENTS ---------------
+import { Label } from "@/components/ui/label";
+import { Select, SelectContent, SelectGroup, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
+
+// --------------- IMPORTING OTHER FILES ---------------
+import { useRestaurantStore } from "@/store/useRestaurantStore";
 
 const Orders = () => {
   const {

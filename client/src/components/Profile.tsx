@@ -1,19 +1,13 @@
 import { FormEvent, useRef, useState } from "react";
-import {
-  Loader2,
-  Camera,
-  User,
-  Settings,
-  CreditCard,
-  Heart,
-  Clock,
-  LogOut,
-  ChevronRight
-} from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Loader2, Camera, User, Heart, Clock, LogOut, ChevronRight } from "lucide-react";
+
+// --------------- IMPORTING UI COMPONENTS ---------------
+import { Button } from "./ui/button";
 import { Input } from "./ui/input";
 import { Label } from "./ui/label";
-import { Button } from "./ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+
+// --------------- IMPORTING OTHER FILES ---------------
 import { useUserStore } from "@/store/useUserStore";
 
 const Profile = () => {

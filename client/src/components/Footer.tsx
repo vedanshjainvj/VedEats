@@ -1,6 +1,7 @@
-import { Facebook, Instagram, Twitter, Linkedin, ArrowRight, MapPin, Phone } from 'lucide-react';
-import { Button } from './ui/button';
-import { Input } from './ui/input';
+// --------------- IMPORTING UI COMPONENTS ---------------
+import { Input } from "./ui/input";
+import { Button } from "./ui/button";
+import { Facebook, Instagram, Twitter, Linkedin, ArrowRight, MapPin, Phone } from "lucide-react";
 
 const Footer = () => {
   const currentYear = new Date().getFullYear();

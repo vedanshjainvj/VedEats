@@ -1,19 +1,15 @@
-import { Minus, Plus, Trash2 } from "lucide-react";
-import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
-import { Button } from "./ui/button";
-import {
-  Table,
-  TableBody,
-  TableCell,
-  TableFooter,
-  TableHead,
-  TableHeader,
-  TableRow,
-} from "./ui/table";
 import { useState } from "react";
-import CheckoutConfirmPage from "./CheckoutConfirmPage";
-import { useCartStore } from "@/store/useCartStore";
+import { Minus, Plus, Trash2 } from "lucide-react";
+
+// --------------- IMPORTING UI COMPONENTS ---------------
+import { Button } from "./ui/button";
+import { Avatar, AvatarFallback, AvatarImage } from "./ui/avatar";
+import { Table, TableBody, TableCell, TableFooter, TableHead, TableHeader, TableRow } from "./ui/table";
+
+// --------------- IMPORTING OTHER FILES ---------------
 import { CartItem } from "@/types/cartType";
+import { useCartStore } from "@/store/useCartStore";
+import CheckoutConfirmPage from "./CheckoutConfirmPage";
 
 const Cart = () => {
   const [open, setOpen] = useState(false);

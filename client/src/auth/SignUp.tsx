@@ -1,11 +1,15 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { SignupInputState, userSignupSchema } from "@/schema/userSchema";
-import { useUserStore } from "@/store/useUserStore";
-import { Loader2, LockKeyhole, Mail, PhoneOutgoing, User } from "lucide-react";
-import { ChangeEvent, FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useState, ChangeEvent, FormEvent } from "react";
+import { Loader2, LockKeyhole, Mail, PhoneOutgoing, User } from "lucide-react";
+
+// --------------- IMPORTING UI COMPONENTS ---------------
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+
+// --------------- IMPORTING OTHER FILES ---------------
+import { useUserStore } from "@/store/useUserStore";
+import { SignupInputState, userSignupSchema } from "@/schema/userSchema";
 
 const Signup = () => {
   const [input, setInput] = useState<SignupInputState>({
@@ -162,12 +166,12 @@ const Signup = () => {
           </div>
 
           <div className="space-y-4">
-            <Button 
+            {/* <Button 
               variant="outline" 
               className="w-full h-12 border-accent-charcoal/20 hover:bg-accent-cream/50 rounded-xl shadow-sm transition-all"
             >
               Continue with Google
-            </Button>
+            </Button> */}
 
             <p className="text-center text-accent-charcoal/60 pt-4">
               Already have an account?{" "}

@@ -1,8 +1,10 @@
-  import { useEffect, useState } from "react";
-  import { useSearchParams } from "react-router-dom";
-  import axios from "axios";
-  import { Download, XCircle } from "lucide-react";
-  import { CartItem } from "@/types/cartType";
+import axios from "axios";
+import { useEffect, useState } from "react";
+import { Download, XCircle } from "lucide-react";
+import { useSearchParams } from "react-router-dom";
+
+// --------------- IMPORTING OTHER FILES ---------------
+import { CartItem } from "@/types/cartType";
 
   interface DeliveryDetails {
     name: string;

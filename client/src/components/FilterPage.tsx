@@ -1,7 +1,10 @@
-import { useRestaurantStore } from "@/store/useRestaurantStore";
+// --------------- IMPORTING UI COMPONENTS ---------------
+import { Label } from "./ui/label";
 import { Button } from "./ui/button";
 import { Checkbox } from "./ui/checkbox";
-import { Label } from "./ui/label";
+
+// --------------- IMPORTING OTHER FILES ---------------
+import { useRestaurantStore } from "@/store/useRestaurantStore";
 
 export type FilterOptionsState = {
   id: string;

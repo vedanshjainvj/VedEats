@@ -1,3 +1,4 @@
+// --------------- IMPORTING UI COMPONENTS ---------------
 import { Loader2 } from 'lucide-react';
 
 const Loading = () => {

@@ -1,7 +1,10 @@
 import { useEffect } from "react";
-import { useRestaurantStore } from "@/store/useRestaurantStore";
+import { MoveRight } from "lucide-react";
+
+// --------------- IMPORTING OTHER FILES ---------------
 import { useNavigate } from "react-router-dom";
-import { MoveRight } from "lucide-react"
+import { useRestaurantStore } from "@/store/useRestaurantStore";
+
 const RestaurantCard = () => {
   const { getAllRestaurants, allRestaurants, loading, getSingleRestaurant } =
     useRestaurantStore();

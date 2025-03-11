@@ -9,9 +9,9 @@ import restaurantRoutes from './restaurant.route';
 const router = express.Router();
 
 router.use('/user', userRoutes);
-router.use('/restaurant', restaurantRoutes);
 router.use('/menu', menuRoutes);
 router.use('/order', orderRoutes);
+router.use('/restaurant', restaurantRoutes);
 
 export default router;
 

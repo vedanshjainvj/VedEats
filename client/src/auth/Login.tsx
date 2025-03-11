@@ -1,11 +1,15 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Separator } from "@/components/ui/separator";
-import { LoginInputState, userLoginSchema } from "@/schema/userSchema";
-import { useUserStore } from "@/store/useUserStore";
-import { Loader2, LockKeyhole, Mail } from "lucide-react";
-import { ChangeEvent, FormEvent, useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
+import { useState, ChangeEvent, FormEvent } from "react";
+import { Loader2, LockKeyhole, Mail } from "lucide-react";
+
+// --------------- IMPORTING UI COMPONENTS ---------------
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Separator } from "@/components/ui/separator";
+
+// --------------- IMPORTING OTHER FILES ---------------
+import { useUserStore } from "@/store/useUserStore";
+import { LoginInputState, userLoginSchema } from "@/schema/userSchema";
 
 const Login = () => {
   const [input, setInput] = useState<LoginInputState>({

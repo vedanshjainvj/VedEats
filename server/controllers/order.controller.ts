@@ -85,25 +85,19 @@ export const stripeWebhook = async (req: Request, res: Response) => {
 
     try {
         const signature = req.headers["stripe-signature"];
-
-        // Construct the payload string for verification
         const payloadString = JSON.stringify(req.body, null, 2);
         const secret = process.env.WEBHOOK_ENDPOINT_SECRET!;
-
-        // Generate test header string for event construction
         const header = stripe.webhooks.generateTestHeaderString({
             payload: payloadString,
             secret,
         });
 
-        // Construct the event using the payload string and header
         event = stripe.webhooks.constructEvent(payloadString, header, secret);
     } catch (error: any) {
         console.error('Webhook error:', error.message);
         return ResponseHandler({ statusCode: StatusCodeUtility.BadRequest, message: "Webhook error", data: null, response: res });
     }
 
-    // Handle the checkout session completed event
     if (event.type === "checkout.session.completed") {
         try {
             const session = event.data.object as Stripe.Checkout.Session;
@@ -112,15 +106,14 @@ export const stripeWebhook = async (req: Request, res: Response) => {
             if (!order) {
                 return ResponseHandler({ statusCode: StatusCodeUtility.NotFound, message: "Order not found", data: null, response: res });
             }
-            // console.log(session)
-            // Update the order with the amount and status
+
             if (session.amount_total) {
                 order.totalAmount = session.amount_total;
             }
             order.status = "confirmed";
-            order.paymentId = session.payment_intent as string; // Assuming payment_intent contains the payment ID
-        order.paymentMode = session.payment_method_types?.[0]; // e.g., 'card'
-        order.paidAt = new Date(); // Current timestamp as paid date
+            order.paymentId = session.payment_intent as string;
+            order.paymentMode = session.payment_method_types?.[0];
+            order.paidAt = new Date();
 
             await order.save();
         } catch (error) {
@@ -128,7 +121,7 @@ export const stripeWebhook = async (req: Request, res: Response) => {
             return ResponseHandler({ statusCode: StatusCodeUtility.InternalServerError, message: "Error handling event", data: null, response: res });
         }
     }
-    // Send a 200 response to acknowledge receipt of the event
+
     ResponseHandler({ statusCode: StatusCodeUtility.Success, message: "Webhook received", data: null, response: res });
 };
 

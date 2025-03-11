@@ -1,9 +1,14 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { useUserStore } from "@/store/useUserStore";
-import { Loader2, Mail } from "lucide-react";
-import { FormEvent, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { useState, FormEvent, useRef } from "react";
+
+// --------------- IMPORTING UI COMPONENTS ---------------
+import { Loader2, Mail } from "lucide-react";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
+// --------------- IMPORTING OTHER FILES ---------------
+import { useUserStore } from "@/store/useUserStore";
+
 
 const VerifyEmail = () => {
   const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]);

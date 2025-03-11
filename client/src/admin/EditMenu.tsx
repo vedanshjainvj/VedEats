@@ -1,25 +1,16 @@
-import { Button } from "@/components/ui/button";
-import {
-  Dialog,
-  DialogContent,
-  DialogDescription,
-  DialogFooter,
-  DialogHeader,
-  DialogTitle,
-} from "@/components/ui/dialog";
+import { Dispatch, FormEvent, SetStateAction, useEffect, useState } from "react";
+
+// --------------- IMPORTING UI COMPONENTS ---------------
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { MenuFormSchema,menuSchema } from "@/schema/menuSchema";
-import { useMenuStore } from "@/store/useMenuStore";
-import { MenuItem } from "@/types/restaurantType";
+import { Button } from "@/components/ui/button";
 import { Loader2 } from "lucide-react";
-import {
-  Dispatch,
-  FormEvent,
-  SetStateAction,
-  useEffect,
-  useState,
-} from "react";
+import { Dialog, DialogContent, DialogDescription, DialogFooter, DialogHeader, DialogTitle } from "@/components/ui/dialog";
+
+// --------------- IMPORTING OTHER FILES ---------------
+import { MenuItem } from "@/types/restaurantType";
+import { useMenuStore } from "@/store/useMenuStore";
+import { MenuFormSchema, menuSchema } from "@/schema/menuSchema";
 
 const EditMenu = ({
   selectedMenu,

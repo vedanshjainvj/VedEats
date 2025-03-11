@@ -1,9 +1,8 @@
 import { Server } from 'socket.io';
 import { Server as HTTPServer } from 'http';
 
-let io: Server; // Declare io variable for access across functions
+let io: Server;
 
-// Initialize Socket.IO
 export const initSocketIO = (httpServer: HTTPServer): void => {
     io = new Server(httpServer, { cors: { origin: '*' } });
 
@@ -17,7 +16,6 @@ export const initSocketIO = (httpServer: HTTPServer): void => {
     });
 };
 
-// Emit Order Update Event
 export const notifyOrderUpdate = (updatedOrder: any): void => {
     if (!io) {
         console.error('Socket.IO not initialized');

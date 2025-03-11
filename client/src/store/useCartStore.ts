@@ -1,7 +1,9 @@
-import { CartState, CartItem } from "@/types/cartType";
-import { MenuItem } from "@/types/restaurantType";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+
+// --------------- IMPORTING OTHER FILES ---------------
+import { MenuItem } from "@/types/restaurantType";
+import { CartState, CartItem } from "@/types/cartType";
 
 export const useCartStore = create<CartState>()(
   persist(

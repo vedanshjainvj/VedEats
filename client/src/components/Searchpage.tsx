@@ -1,15 +1,20 @@
-import { Link, useParams } from "react-router-dom";
-import FilterPage from "./FilterPage";
-import { Input } from "./ui/input";
 import { useEffect, useState } from "react";
-import { Button } from "./ui/button";
-import { Badge } from "./ui/badge";
+import { Link, useParams } from "react-router-dom";
 import { Globe, MapPin, X, Search, Star, Clock, TrendingUp } from "lucide-react";
-import { Card, CardContent, CardFooter } from "./ui/card";
-import { AspectRatio } from "./ui/aspect-ratio";
+
+// --------------- IMPORTING UI COMPONENTS ---------------
+import { Input } from "./ui/input";
+import { Badge } from "./ui/badge";
+import { Button } from "./ui/button";
 import { Skeleton } from "./ui/skeleton";
-import { useRestaurantStore } from "@/store/useRestaurantStore";
+import { AspectRatio } from "./ui/aspect-ratio";
+import { Card, CardContent, CardFooter } from "./ui/card";
+
+// --------------- IMPORTING OTHER FILES ---------------
+import FilterPage from "./FilterPage";
 import { Restaurant } from "@/types/restaurantType";
+import { useRestaurantStore } from "@/store/useRestaurantStore";
+
 
 const SearchPage = () => {
   const params = useParams();

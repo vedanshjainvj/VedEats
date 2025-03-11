@@ -1,9 +1,13 @@
-import { MenuItem } from "@/types/restaurantType";
+import { useNavigate } from "react-router-dom";
+import { ShoppingCart } from "lucide-react";
+
+// --------------- IMPORTING UI COMPONENTS ---------------
 import { Button } from "./ui/button";
 import { Card, CardContent, CardFooter } from "./ui/card";
+
+// --------------- IMPORTING OTHER FILES ---------------
 import { useCartStore } from "@/store/useCartStore";
-import { useNavigate } from "react-router-dom";
-import { ShoppingCart } from "lucide-react"
+import { MenuItem } from "@/types/restaurantType";
 
 const AvailableMenu = ({ menus }: { menus: MenuItem[] }) => {
   const { addToCart } = useCartStore();

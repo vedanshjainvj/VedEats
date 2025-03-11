@@ -1,12 +1,14 @@
-
-import { Orders } from "@/types/orderType";
-import { MenuItem, RestaurantState } from "@/types/restaurantType";
 import axios from "axios";
 import { toast } from "sonner";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
-const API_END_POINT = "http://localhost:8000/api/v1/restaurant";
+// --------------- IMPORTING OTHER FILES ---------------
+import { Orders } from "@/types/orderType";
+import { API_ENDPOINT } from "@/constants/constants";
+import { MenuItem, RestaurantState } from "@/types/restaurantType";
+
+const API_END_POINT = `${API_ENDPOINT}/restaurant`;
 axios.defaults.withCredentials = true;
 
 export const useRestaurantStore = create<RestaurantState>()(persist((set, get) => ({

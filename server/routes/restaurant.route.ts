@@ -7,13 +7,13 @@ import { createRestaurant, getRestaurant, getRestaurantOrder, updateOrderStatus,
 
 const router = express.Router();
 
-router.route("/").post(isAuthenticated, upload.single("imageFile"), createRestaurant);
 router.route("/").get(isAuthenticated, getRestaurant);
-router.route("/get-all").get(isAuthenticated, getAllRestaurants);
-router.route("/").put(isAuthenticated, upload.single("imageFile"), updateRestaurant);
-router.route("/order").get(isAuthenticated,  getRestaurantOrder);
-router.route("/order/:orderId/status").put(isAuthenticated, updateOrderStatus);
-router.route("/search/:searchText").get(isAuthenticated, searchRestaurant);
 router.route("/:id").get(isAuthenticated, getSingleRestaurant);
+router.route("/get-all").get(isAuthenticated, getAllRestaurants);
+router.route("/order").get(isAuthenticated,  getRestaurantOrder);
+router.route("/search/:searchText").get(isAuthenticated, searchRestaurant);
+router.route("/order/:orderId/status").put(isAuthenticated, updateOrderStatus);
+router.route("/").put(isAuthenticated, upload.single("imageFile"), updateRestaurant);
+router.route("/").post(isAuthenticated, upload.single("imageFile"), createRestaurant);
 
 export default router;

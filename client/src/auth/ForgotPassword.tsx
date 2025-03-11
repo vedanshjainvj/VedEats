@@ -1,14 +1,18 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Loader2, Mail } from "lucide-react";
 import { useState } from "react";
 import { Link } from "react-router-dom";
-import { useUserStore } from "@/store/useUserStore"; // Adjust the import path as needed
+import { Loader2, Mail } from "lucide-react";
+
+// --------------- IMPORTING UI COMPONENTS ---------------
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+
+// --------------- IMPORTING OTHER FILES ---------------
 import { toast } from "sonner";
+import { useUserStore } from "@/store/useUserStore";
 
 const ForgotPassword = () => {
     const [email, setEmail] = useState<string>("");
-    const { forgotPassword, loading } = useUserStore(); // Access the store functions and loading state
+    const { forgotPassword, loading } = useUserStore();
 
     const handleForgotPassword = async (e: React.FormEvent) => {
         e.preventDefault();

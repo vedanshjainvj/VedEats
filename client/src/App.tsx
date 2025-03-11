@@ -1,29 +1,37 @@
-import Login from "./auth/Login";
-import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import Signup from "./auth/SignUp";
-import ForgotPassword from "./auth/ForgotPassword";
-import ResetPassword from "./auth/ResetPassword";
-import VerifyEmail from "./auth/VerifyEmail";
-import MainLayout from "./layout/MainLayout";
+import { useEffect } from "react";
+import { Navigate, createBrowserRouter, RouterProvider } from "react-router-dom";
+
+// --------------- IMPORTING STORE ---------------
+import { useUserStore } from "./store/useUserStore";
+import { useThemeStore } from "./store/useThemeStore";
+
+// --------------- IMPORTING PAGES & COMPONENTS ---------------
+import Home from "./screen/Home";
+import Loading from "./components/Loading";
+import Success from "./components/Success";
 import Profile from "./components/Profile";
+import Cart from "./components/Cart";
+import MyOrders from "./components/MyOrders";
 import SearchPage from "./components/Searchpage";
 import RestaurantDetail from "./components/RestaurantDetail";
-import Cart from "./components/Cart";
-import Restaurant from "./admin/Restaurant";
-import AddMenu from "./admin/AddMenu";
+
+// --------------- IMPORTING AUTH PAGES ---------------
+import Login from "./auth/Login";
+import Signup from "./auth/SignUp";
+import VerifyEmail from "./auth/VerifyEmail";
+import ForgotPassword from "./auth/ForgotPassword";
+import ResetPassword from "./auth/ResetPassword";
+
+// --------------- IMPORTING LAYOUT ---------------
+import MainLayout from "./layout/MainLayout";
+
+// --------------- IMPORTING ADMIN PAGES ---------------
 import Orders from "./admin/Orders";
-import MyOrders from "./components/MyOrders";
-import { useUserStore } from "./store/useUserStore";
-import { Navigate } from "react-router-dom";
-import { useEffect } from "react";
-import Loading from "./components/Loading";
-import { useThemeStore } from "./store/useThemeStore";
-import Success from "./components/Success";
-import Home from "./screen/Home";
+import AddMenu from "./admin/AddMenu";
+import Restaurant from "./admin/Restaurant";
 
 const ProtectedRoutes = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, user } = useUserStore();
-  // console.log(user)
   if (!isAuthenticated) {
     return <Navigate to="/login" replace />;
   }

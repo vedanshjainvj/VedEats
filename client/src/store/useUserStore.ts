@@ -1,10 +1,14 @@
-import { create } from "zustand";
-import { createJSONStorage, persist } from "zustand/middleware";
 import axios from "axios";
-import { LoginInputState, SignupInputState } from "@/schema/userSchema";
 import { toast } from "sonner";
+import { create } from "zustand";
 
-const API_END_POINT = "http://localhost:8000/api/v1/user";
+// --------------- IMPORTING OTHER FILES ---------------
+import { createJSONStorage, persist } from "zustand/middleware";
+import { LoginInputState, SignupInputState } from "@/schema/userSchema";
+
+import { API_ENDPOINT } from "@/constants/constants";
+
+const API_END_POINT = `${API_ENDPOINT}/user`;
 axios.defaults.withCredentials = true;
 
 type User = {

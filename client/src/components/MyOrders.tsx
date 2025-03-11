@@ -1,13 +1,16 @@
+import { useEffect, useState } from "react";
 import { IndianRupee } from "lucide-react";
+import { io, Socket } from "socket.io-client";
+
+// --------------- IMPORTING UI COMPONENTS ---------------
 import { Separator } from "./ui/separator";
 import { Button } from "./ui/button";
-import { useOrderStore } from "@/store/useOrderStore";
-import { useEffect, useState } from "react";
-import { io, Socket } from "socket.io-client";
 import { Dialog, DialogContent, DialogTitle, DialogTrigger } from "./ui/dialog";
-// import { CartItem } from "@/types/cartType";
+
+// --------------- IMPORTING OTHER FILES ---------------
 import { Orders } from "@/types/orderType";
 import { Restaurant } from "@/types/restaurantType";
+import { useOrderStore } from "@/store/useOrderStore";
 
 // Create a type for the order item that matches the Orders interface
 type OrderCartItem = {

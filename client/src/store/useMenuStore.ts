@@ -2,19 +2,19 @@ import axios from "axios";
 import { toast } from "sonner";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
+
+// --------------- IMPORTING OTHER FILES ---------------
+import { API_ENDPOINT } from "@/constants/constants";
 import { useRestaurantStore } from "./useRestaurantStore";
 
-// Define the API endpoint
-const API_END_POINT = "http://localhost:8000/api/v1/menu";
+const API_END_POINT = `${API_ENDPOINT}/menu`;
 axios.defaults.withCredentials = true;
 
-// Define the types for the menu data (You can adjust the structure as needed)
 type Menu = {
   id: string;
   name: string;
   price: number;
   description: string;
-  // Add more properties as needed
 };
 
 type MenuState = {

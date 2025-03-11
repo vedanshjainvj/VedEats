@@ -1,6 +1,8 @@
-import React, { useEffect, useState } from 'react';
-import { useMenuStore } from '@/store/useMenuStore';
-import { ShoppingCart } from 'lucide-react';
+import React, { useEffect, useState } from "react";
+import { ShoppingCart } from "lucide-react";
+
+// --------------- IMPORTING OTHER FILES ---------------
+import { useMenuStore } from "@/store/useMenuStore";
 
 const MenuCard = () => {
   // Fetch menu items from the store
